@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">		
+ *{margin: 0;border: 0;padding: 0;list-style: none;text-decoration: none;}
+.main{width: 490px;height: 170px;margin: 200px;position: relative;}
+.title{width: 150px;height: 20px;position: absolute;left:300px;	top:140px;z-index: 2;}
+.title ul{width: 170px;	height: 20px;}
+.title ul li{float: left;width: 18px;height: 18px;border: 1px solid green;text-align: center;
+		margin-right: 10px;background: white;}
+ul li.select{background-color: orange;}	
+.pic{width: 490px;height: 170px;overflow: hidden;}
+.pic .mod{transition:all 2s;position: absolute;left: 0;	top: 0;opacity: 0;}	
+		</style>
+	</head>
+	<body>
+			<div class="main" id="main">
+		<div class="title" id="title">
+			<ul>
+				<li class="select"><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+			</ul>
+		</div>
+		<div class="pic" id="pic">
+			<div class="mod" style="z-index:1; opacity:1;">
+				<img src="img/1.jpg">
+			</div>
+			<div class="mod">
+				<img src="img/2.jpg">
+			</div>
+			<div class="mod">
+				<img src="img/3.jpg">
+			</div>
+			<div class="mod">
+				<img src="img/4.jpg">
+			</div>
+			<div class="mod">
+				<img src="img/5.jpg">
+			</div>
+			
+		</div>
+	</div>
+
+      </div>
+ </div>
+	</body>
+</html>
+<script type="text/javascript">
+function $(id){ return document.getElementById(id);}
+window.onload=function(){
+	function aa(curindex){
+		for(var j=0;j<titles.length;j++){
+			titles[j].className='';
+			divs[j].style.opacity='0';
+			divs[j].style.zIndex='-1';
+		}
+		titles[curindex].className='select';
+		divs[curindex].style.opacity='1';
+		divs[curindex].style.zIndex='1';
+		index=curindex;
+	}
+	function bb(){
+		index++;
+		if(index>=titles.length){
+			index=0;
+		}
+		aa(index);
+	}
+	function cc(obj){
+		for(var i=0;i<titles.length;i++){
+		obj[i].id=i;
+		obj[i].onmouseover=function(){
+			clearInterval(timer);
+			aa(this.id);
+		}
+		obj[i].onmouseout=function(){
+			timer=setInterval(bb,2000);
+		}
+	}
+	}
+	var titles=$('title').getElementsByTagName('li');
+	var divs=$('pic').getElementsByTagName('div');
+	var timer=null;
+	var index=0;
+	timer=setInterval(bb,2000);
+	cc(titles);
+	cc(divs);
+}
+</script>
